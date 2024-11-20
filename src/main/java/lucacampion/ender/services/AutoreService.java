@@ -12,6 +12,7 @@ public class AutoreService {
     AutoreRepository autoreRepository;
 
 
+    // FIND BY NOME
     public Autore trovaAutore(String nomeAutore) {
         if(autoreRepository.findByNome(nomeAutore).isEmpty()){
             throw new NotFoundException("L'autore " + nomeAutore + " non è stato trovato");

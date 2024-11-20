@@ -18,15 +18,15 @@ public class Autore {
     private long id;
 
     @Column(name = "nome_autore")
-    private String nomeAutore;
+    private String nome;
 
     @OneToMany(mappedBy = "autore")
     private List<Evento> listaEventi;
 
 
     // costruttore generale
-    public Autore(List<Evento> listaEventi, String nomeAutore) {
+    public Autore(List<Evento> listaEventi, String nome) {
         this.listaEventi = listaEventi;
-        this.nomeAutore = nomeAutore;
+        this.nome = this.nome;
     }
 }
