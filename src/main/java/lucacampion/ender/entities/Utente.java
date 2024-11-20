@@ -20,18 +20,20 @@ public class Utente {
     private String email;
     private String nickname;
     private String fotoProfilo;
+    private String password;
 
     @ManyToMany(mappedBy = "utenti")
     private List<Evento> eventi;
 
 
     // costruttore generale
-    public Utente(String cognome, String email, List<Evento> eventi, String fotoProfilo, String nickname, String nome) {
+    public Utente(String cognome, String email, List<Evento> eventi, String fotoProfilo, String nickname, String nome, String password) {
         this.cognome = cognome;
         this.email = email;
         this.eventi = eventi;
         this.fotoProfilo = fotoProfilo;
         this.nickname = nickname;
         this.nome = nome;
+        this.password = password;
     }
 }
