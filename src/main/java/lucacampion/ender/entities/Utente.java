@@ -23,4 +23,15 @@ public class Utente {
 
     @ManyToMany(mappedBy = "utenti")
     private List<Evento> eventi;
+
+
+    // costruttore generale
+    public Utente(String cognome, String email, List<Evento> eventi, String fotoProfilo, String nickname, String nome) {
+        this.cognome = cognome;
+        this.email = email;
+        this.eventi = eventi;
+        this.fotoProfilo = fotoProfilo;
+        this.nickname = nickname;
+        this.nome = nome;
+    }
 }

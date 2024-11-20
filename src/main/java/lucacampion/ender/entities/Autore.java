@@ -16,8 +16,17 @@ public class Autore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private long id;
+
+    @Column(name = "nome_autore")
     private String nomeAutore;
 
     @OneToMany(mappedBy = "autore")
     private List<Evento> listaEventi;
+
+
+    // costruttore generale
+    public Autore(List<Evento> listaEventi, String nomeAutore) {
+        this.listaEventi = listaEventi;
+        this.nomeAutore = nomeAutore;
+    }
 }
