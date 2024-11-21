@@ -49,7 +49,7 @@ public class AutoreController {
         return this.autoreService.findByNomeAndUpdate(nomeAutore, body);
     }
 
-    // GET tramite nome e DELETE
+    // DELETE
     // http://localhost:3001/autori/{nomeAutore}
     @DeleteMapping("/{nomeAutore}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -38,6 +38,14 @@ public class AutoreService {
         return this.autoreRepository.findAll(pageable);
     }
 
+    // FIND BY ID
+    public Autore findAutoreById(Long autoreId) {
+        if(autoreRepository.findById(autoreId).isEmpty()) {
+            throw new NotFoundException("L'autore con id " + autoreId + " non è stato trovato");
+        }
+        return autoreRepository.findById(autoreId).get();
+    }
+
     // FIND BY NOME
     public Autore trovaAutore(String nomeAutore) {
         if(autoreRepository.findByNome(nomeAutore).isEmpty()){
