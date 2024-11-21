@@ -1,7 +1,7 @@
 package lucacampion.ender.services;
 
-import lucacampion.ender.entities.Evento;
 import lucacampion.ender.entities.Utente;
+import lucacampion.ender.exceptions.BadRequestException;
 import lucacampion.ender.exceptions.NotFoundException;
 import lucacampion.ender.payloads.NuovoUtenteDTO;
 import lucacampion.ender.repositories.UtenteRepository;
@@ -25,8 +25,16 @@ public class UtenteService {
     }
 
     // FIND BY EMAIL
-    public Utente findByEmail(String email){
+    public Utente findByEmail(String email) {
         return this.utenteRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("L'utente con mail " + email + " non è stato trovato!"));
+    }
+
+    // FIND BY ID
+    public Utente trovaUtente(Long utenteId) {
+        if(utenteRepository.findById(utenteId).isEmpty()) {
+            throw new NotFoundException("L'utente con id " + utenteId + " non è stato trovato!");
+        }
+        return utenteRepository.findById(utenteId).get();
     }
 
     // FIND ALL
@@ -34,6 +42,26 @@ public class UtenteService {
         if (size > 100) size = 100;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return this.utenteRepository.findAll(pageable);
+    }
+
+    // FIND BY ID AND UPDATE
+    public Utente findByIdAndUpdate(Long utenteId, NuovoUtenteDTO body) {
+        Utente found = this.trovaUtente(utenteId);
+        if (!found.getNickname().equals(body.nickname())) {
+            throw new BadRequestException("L'utente con id " + utenteId + " non è stato trovato!");
+        }
+        found.setNome(body.nome());
+        found.setCognome(body.cognome());
+        found.setEmail(body.email());
+        found.setNickname(body.nickname());
+        found.setPassword(body.pasword());
+        return this.utenteRepository.save(found);
+    }
+
+    // FIND AND DELETE
+    public void findByIdAndDelete(Long utenteId) {
+        Utente found = this.trovaUtente(utenteId);
+        this.utenteRepository.delete(found);
     }
 
 }

@@ -2,7 +2,6 @@ package lucacampion.ender.controllers;
 
 import lucacampion.ender.entities.Evento;
 import lucacampion.ender.exceptions.BadRequestException;
-import lucacampion.ender.payloads.NuovoAutoreDTO;
 import lucacampion.ender.payloads.NuovoEventoDTO;
 import lucacampion.ender.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
