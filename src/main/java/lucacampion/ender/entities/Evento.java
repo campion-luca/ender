@@ -23,6 +23,7 @@ public class Evento {
     private LocalDate dataEvento;
     private String descrizione;
     private Double prezzo;
+    private String fotoEvento = "default.jpg";  // FOTO DELL EVENTO PER ORA DEFAULT
     private String luogo;
     @ManyToOne
     @JoinColumn(name="autore_id")

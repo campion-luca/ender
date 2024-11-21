@@ -19,12 +19,6 @@ public class EventoService {
     private AutoreService autoreService;
 
 
-    // FIND ALL
-    public Page<Evento> findAll(int page, int size, String sortBy) {
-        if (size > 100) size = 100;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return this.eventoRepository.findAll(pageable);
-    }
 
     // SALVA NUOVO EVENTO
     public Evento save(NuovoEventoDTO body) {
@@ -32,4 +26,13 @@ public class EventoService {
         Evento newEvento = new Evento(foundAutore,body.dataEvento(),body.descrizione(),body.luogo(),body.nome(),body.prezzo());
         return this.eventoRepository.save(newEvento);
     }
+
+
+    // FIND ALL
+    public Page<Evento> findAll(int page, int size, String sortBy) {
+        if (size > 100) size = 100;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return this.eventoRepository.findAll(pageable);
+    }
+
 }

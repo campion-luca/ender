@@ -21,11 +21,11 @@ public class JWT {
                // 1000 = 1 secondo --- * 60 = 1 minuto --- * 60 = 1 ora --- * 24 = 1 giorno --- * 7 = 1 settimana
                 .subject(String.valueOf(utente.getId())) // proprietario del token (NO DATI SENSIBILI)
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes())) // firma del token, necessiterò di hmac e un segreto
-                .compact() // assemblerà tutto in una stringa, ossia il mio token
+                .compact(); // assemblerà tutto in una stringa, ossia il mio token
     }
 
-    public void verifyToken(String accesToken){
-        // parse = verifica token
-        Jwts.parser()
-    }
+//    public void verifyToken(String accesToken){
+//        // parse = verifica token
+//        Jwts.parser()
+//    }
 }
