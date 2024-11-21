@@ -5,10 +5,7 @@ import lucacampion.ender.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/utenti")
@@ -24,4 +21,11 @@ public class UtenteController {
                                 @RequestParam(defaultValue = "id") String sortBy) {
         return this.utenteService.findAll(page, size, sortBy);
     }
+
+    // VISUALIZZA UN UTENTE TRAMITE ID
+//    @GetMapping("/{userId}")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    public Utente findById(@PathVariable Long userId) {
+//        return this.utenteService
+//    }
 }

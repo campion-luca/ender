@@ -3,6 +3,7 @@ package lucacampion.ender.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,8 @@ public class Autore {
 
 
     // costruttore generale
-    public Autore(List<Evento> listaEventi, String nome) {
-        this.listaEventi = listaEventi;
+    public Autore(String nome) {
+        this.listaEventi = new ArrayList<>();;
         this.nome = this.nome;
     }
 }
