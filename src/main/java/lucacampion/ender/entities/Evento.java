@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Evento {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
     @Column(name = "nome_evento")

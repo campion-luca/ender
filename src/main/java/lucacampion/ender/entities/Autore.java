@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Autore {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
 
-    @Column(name = "nome_autore")
+    @Column(name = "nome_autore", nullable = false)
     private String nome;
 
     @OneToMany(mappedBy = "autore")
@@ -28,6 +28,6 @@ public class Autore {
     // costruttore generale
     public Autore(String nome) {
         this.listaEventi = new ArrayList<>();;
-        this.nome = this.nome;
+        this.nome = nome;
     }
 }

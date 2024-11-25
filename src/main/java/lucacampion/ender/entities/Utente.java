@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Utente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
     private String nome;
@@ -38,3 +38,6 @@ public class Utente {
         this.password = password;
     }
 }
+
+// NOT WORKING
+//(strategy = GenerationType.IDENTITY)
