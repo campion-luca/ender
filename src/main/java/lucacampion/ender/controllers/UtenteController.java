@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/utenti") // prefisso comune per tutti gli endpoint
 public class UtenteController {
@@ -33,12 +35,6 @@ public class UtenteController {
     public Utente findById(@PathVariable Long utenteId) {
         return this.utenteService.trovaUtente(utenteId);
     }
-
-    // POST
-    // http://localhost:3001/utenti + (payload)
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // 201
-    public Utente saveUtente(@RequestBody NuovoUtenteDTO body) { return this.utenteService.save(body);}
 
     // UPDATE
     // http://localhost:3001/utenti/{utenteId} + (payload)

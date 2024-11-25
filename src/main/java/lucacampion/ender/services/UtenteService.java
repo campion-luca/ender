@@ -20,7 +20,7 @@ public class UtenteService {
 
     // SAVE NUOVO UTENTE
     public Utente save(NuovoUtenteDTO body) {
-        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(),body.pasword());
+        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(),body.password());
         return this.utenteRepository.save(newUtente);
     }
 
@@ -54,7 +54,7 @@ public class UtenteService {
         found.setCognome(body.cognome());
         found.setEmail(body.email());
         found.setNickname(body.nickname());
-        found.setPassword(body.pasword());
+        found.setPassword(body.password());
         return this.utenteRepository.save(found);
     }
 

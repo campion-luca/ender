@@ -3,6 +3,7 @@ package lucacampion.ender.tools;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lucacampion.ender.entities.Utente;
+import lucacampion.ender.exceptions.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +25,14 @@ public class JWT {
                 .compact(); // assemblerà tutto in una stringa, ossia il mio token
     }
 
-//    public void verifyToken(String accesToken){
-//        // parse = verifica token
-//        Jwts.parser()
-//    }
+    public void verifyToken(String accessToken){
+        // parse = verifica token
+        try {
+            Jwts.parser()
+                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                    .build().parse(accessToken);
+        } catch (Exception ex) {
+            throw  new UnauthorizedException("Problemi con il token! Per favore effettua di nuovo il login!");
+        }
+    }
 }
