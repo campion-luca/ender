@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
+
     // GET all
     // http://localhost:3001/utenti
     @GetMapping
@@ -28,6 +30,25 @@ public class UtenteController {
                                 @RequestParam(defaultValue = "id") String sortBy) {
         return this.utenteService.findAll(page, size, sortBy);
     }
+
+
+    // **************************************************** ME ENDPOINT ****************************************************
+    @GetMapping("/me")
+    public Utente getProfile(@AuthenticationPrincipal Utente currentAuthenticaticatedUser){
+        return currentAuthenticaticatedUser;
+    }
+
+    @PutMapping("/me")
+    public Utente updateProfile(@AuthenticationPrincipal Utente currentAuthenticaticatedUser, @RequestBody @Validated NuovoUtenteDTO body) {
+        return this.utenteService.findByIdAndUpdate(currentAuthenticaticatedUser.getId(), body);
+    }
+
+    @DeleteMapping("/me")
+    public void deleteProfile(@AuthenticationPrincipal Utente currentAuthenticaticatedUser) {
+        this.utenteService.findByIdAndDelete(currentAuthenticaticatedUser.getId());
+    }
+    // ********************************************************************************************************
+
 
     // GET tramite ID
     // http://localhost:3001/utenti/{utenteId}
@@ -39,6 +60,7 @@ public class UtenteController {
     // UPDATE
     // http://localhost:3001/utenti/{utenteId} + (payload)
     @PutMapping("/{utenteId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Utente findByIdAndUpdate(@PathVariable Long utenteId, @RequestBody @Validated NuovoUtenteDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             validationResult.getAllErrors().forEach(System.out::println);
@@ -50,6 +72,7 @@ public class UtenteController {
     // DELETE
     // http://localhost:3001/utenti/{utenteId}
     @DeleteMapping("/{utenteId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable Long utenteId) {
         this.utenteService.findByIdAndDelete(utenteId);

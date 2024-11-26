@@ -2,8 +2,12 @@ package lucacampion.ender.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -12,7 +16,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Utente {
+public class Utente implements UserDetails {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
@@ -23,12 +27,14 @@ public class Utente {
     private String nickname;
     private String fotoProfilo;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToMany(mappedBy = "utenti")
     private List<Evento> eventi;
 
 
-    // costruttore generale
+    // costruttore generale SBAGLIATO, ORDINE ERRATO
 //    public Utente(String cognome, String email, String nickname, String nome, String password) {
 //        this.cognome = cognome;
 //        this.email = email;
@@ -44,9 +50,19 @@ public class Utente {
         this.nickname = nickname;
         this.password = password;
         this.eventi = new ArrayList<>(); // inizializzo la lista vuota, un utente appena creato non ha subito eventi pratecipanti ma potrà averli
+        this.role = Role.USER; // iniziano tutti come "USER base", solo dopo la verifica di Carta d'identità etc.. potrò certificarlo
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getEmail();
+    }
 }
 
 // NOT WORKING
