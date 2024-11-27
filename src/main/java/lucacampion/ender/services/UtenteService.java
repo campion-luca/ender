@@ -10,17 +10,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UtenteService {
     @Autowired
     UtenteRepository utenteRepository;
-
+    @Autowired
+    private PasswordEncoder bcrypt;
 
     // SAVE NUOVO UTENTE
     public Utente save(NuovoUtenteDTO body) {
-        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(),body.password());
+        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(), bcrypt.encode(body.password()));
         return this.utenteRepository.save(newUtente);
     }
 
