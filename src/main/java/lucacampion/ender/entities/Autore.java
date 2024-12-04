@@ -1,5 +1,7 @@
 package lucacampion.ender.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +24,7 @@ public class Autore {
     private String nome;
 
     @OneToMany(mappedBy = "autore")
+    @JsonBackReference
     private List<Evento> listaEventi;
 
 
