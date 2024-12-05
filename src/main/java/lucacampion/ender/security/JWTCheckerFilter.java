@@ -55,6 +55,9 @@ public class JWTCheckerFilter extends OncePerRequestFilter { // tasto destro + i
     // disabilito il filtro per tutte le richieste al controller Auth, quindi tutte le richieste URL /auth/** non dovranno avere token controllo
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        if (request.getMethod().equals("GET") && new AntPathMatcher().match("/eventi/**", request.getServletPath())) {
+            return true;
+        }
         return new AntPathMatcher().match("/auth/**", request.getServletPath());
     }
 }
