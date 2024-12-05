@@ -18,10 +18,14 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
+
+    // Le GET le potranno fare tutti per visualizzare gli/il evento/i
+    // diverso per il POST, solo l'ADMIN senior o gli organizzatori riconosciuti come tali potranno crearli
+
+
     // GET all
     // http://localhost:3001/eventi
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Evento> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
                                 @RequestParam(defaultValue = "id") String sortBy) {
         return this.eventoService.findAll(page, size, sortBy);
@@ -37,12 +41,15 @@ public class EventoController {
     // POST
     // http://localhost:3001/eventi + (payload)
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ORGANIZZATORE')")
     @ResponseStatus(HttpStatus.CREATED) // 201
     public Evento saveEvento(@RequestBody NuovoEventoDTO body) { return this.eventoService.save(body);}
+
 
     // UPDATE
     // http://localhost:3001/eventi/{eventoId} + (payload)
     @PutMapping("/{eventoId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ORGANIZZATORE')")
     public Evento findByIdAndUpdate(@PathVariable Long eventoId, @RequestBody @Validated NuovoEventoDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             validationResult.getAllErrors().forEach(System.out::println);
@@ -54,6 +61,7 @@ public class EventoController {
     // DELETE
     // http://localhost:3001/eventi/{eventoId}
     @DeleteMapping("/{eventoId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ORGANIZZATORE')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable Long eventoId) {
         this.eventoService.findByIdAndDelete(eventoId);

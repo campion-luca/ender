@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/utenti") // prefisso comune per tutti gli endpoint
@@ -21,6 +20,9 @@ public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
+
+    // Solo l'Admin può accedere ai vari account degli utenti, vederli e cercarli o addirittura eliminarli.
+    // Sarà sempre l'Admin poi a fare l'upgrade degli stessi.
 
     // GET all
     // http://localhost:3001/utenti
@@ -30,6 +32,13 @@ public class UtenteController {
                                 @RequestParam(defaultValue = "id") String sortBy) {
         return this.utenteService.findAll(page, size, sortBy);
     }
+
+    // POST
+    // http://localhost:3001/eventi + (payload)
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED) // 201
+    public Utente saveUtente(@RequestBody NuovoUtenteDTO body) { return this.utenteService.save(body);}
 
 
     // **************************************************** ME ENDPOINT ****************************************************
@@ -53,6 +62,7 @@ public class UtenteController {
     // GET tramite ID
     // http://localhost:3001/utenti/{utenteId}
     @GetMapping("/{utenteId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Utente findById(@PathVariable Long utenteId) {
         return this.utenteService.trovaUtente(utenteId);
     }
