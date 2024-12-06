@@ -34,7 +34,7 @@ public class Utente implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(mappedBy = "utenti")
+    @ManyToMany(mappedBy = "utenti", fetch = FetchType.EAGER)
     private List<Evento> eventi;
 
 

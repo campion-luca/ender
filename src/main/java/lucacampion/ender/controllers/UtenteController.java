@@ -34,7 +34,7 @@ public class UtenteController {
     }
 
     // POST
-    // http://localhost:3001/eventi + (payload)
+    // http://localhost:3001/utenti + (payload)
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED) // 201
