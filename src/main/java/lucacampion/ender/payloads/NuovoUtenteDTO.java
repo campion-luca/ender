@@ -21,6 +21,9 @@ public record NuovoUtenteDTO(@NotEmpty(message = "Il nome è obbligatorio!")
                              @Size(min = 8, max = 30, message = "la password deve essere compreso tra 8 e 30!")
                              @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
                                      message = "La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale!")
-                             String password
+                             String password,
+                             @NotEmpty(message = "La foto profilo è obbligatoria!")
+                             @Size(min = 3, max = 50, message = "Inserisci un URL valido!")
+                             String fotoProfilo
 ) {
 }

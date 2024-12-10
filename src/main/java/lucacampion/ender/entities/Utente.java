@@ -47,12 +47,13 @@ public class Utente implements UserDetails {
 //        this.nome = nome;
 //        this.password = password;
 //    }
-    public Utente(String nome, String cognome, String email, String nickname, String password) {
+    public Utente(String nome, String cognome, String email, String nickname, String password, String fotoProfilo) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.nickname = nickname;
         this.password = password;
+        this.fotoProfilo = fotoProfilo;
         this.eventi = new ArrayList<>(); // inizializzo la lista vuota, un utente appena creato non ha subito eventi pratecipanti ma potrà averli
         this.role = Role.USER; // iniziano tutti come "USER base", solo dopo la verifica di Carta d'identità etc.. potrò certificarlo
     }

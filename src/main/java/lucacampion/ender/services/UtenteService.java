@@ -22,7 +22,7 @@ public class UtenteService {
 
     // SAVE NUOVO UTENTE
     public Utente save(NuovoUtenteDTO body) {
-        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(), bcrypt.encode(body.password()));
+        Utente newUtente = new Utente(body.nome(),body.cognome(),body.email(),body.nickname(), bcrypt.encode(body.password()), body.fotoProfilo());
         return this.utenteRepository.save(newUtente);
     }
 
