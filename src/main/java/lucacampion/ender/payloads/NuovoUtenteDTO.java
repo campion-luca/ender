@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lucacampion.ender.entities.Role;
 
 public record NuovoUtenteDTO(@NotEmpty(message = "Il nome è obbligatorio!")
                              @Size(min = 3, max = 20, message = "Il nome deve essere compreso tra 3 e 20!")
@@ -24,6 +25,7 @@ public record NuovoUtenteDTO(@NotEmpty(message = "Il nome è obbligatorio!")
                              String password,
                              @NotEmpty(message = "La foto profilo è obbligatoria!")
                              @Size(min = 3, max = 50, message = "Inserisci un URL valido!")
-                             String fotoProfilo
+                             String fotoProfilo,
+                             Role role
 ) {
 }
