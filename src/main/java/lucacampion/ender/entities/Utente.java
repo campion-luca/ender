@@ -53,7 +53,7 @@ public class Utente implements UserDetails {
         this.password = password;
         this.fotoProfilo = fotoProfilo;
         this.eventi = new ArrayList<>(); // inizializzo la lista vuota, un utente appena creato non ha subito eventi pratecipanti ma potrà averli
-        this.role = role; // iniziano tutti come "USER base", solo dopo la verifica di Carta d'identità etc.. potrò certificarlo
+        this.role = Role.USER; // iniziano tutti come "USER base", solo dopo la verifica di Carta d'identità etc.. potrò certificarlo
     }
 
 
