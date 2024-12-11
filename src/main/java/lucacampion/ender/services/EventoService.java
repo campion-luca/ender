@@ -24,7 +24,7 @@ public class EventoService {
     // SALVA NUOVO EVENTO
     public Evento save(NuovoEventoDTO body) {
         Autore foundAutore = autoreService.trovaAutore(body.autore());
-        Evento newEvento = new Evento(foundAutore,body.dataEvento(),body.descrizione(),body.luogo(),body.nome(),body.prezzo());
+        Evento newEvento = new Evento(foundAutore,body.dataEvento(),body.descrizione(),body.luogo(),body.nome(),body.prezzo(), body.fotoEvento());
         return this.eventoRepository.save(newEvento);
     }
 
@@ -58,6 +58,7 @@ public class EventoService {
         found.setNomeEvento(body.nome());
         found.setDescrizione(body.descrizione());
         found.setPrezzo(body.prezzo());
+        found.setFotoEvento(body.fotoEvento());
         return this.eventoRepository.save(found);
     }
 

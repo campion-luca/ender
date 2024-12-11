@@ -20,6 +20,8 @@ public record NuovoEventoDTO(@NotEmpty(message = "Il nome dell'evento è importa
                              @Size(min = 10, max = 50, message = "Il luogo deve esistere, almeno 10 caratteri e massimo 50!")
                              String luogo,
 
-                             String autore
+                             String autore,
+                             @NotEmpty(message = "La foto dell'evento è obbligatoria!")
+                             String fotoEvento
 ) {
 }

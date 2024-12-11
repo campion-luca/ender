@@ -1,7 +1,5 @@
 package lucacampion.ender.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +23,7 @@ public class Evento {
     private LocalDate dataEvento;
     private String descrizione;
     private Double prezzo;
-    private String fotoEvento = "default.jpg";  // FOTO DELL EVENTO PER ORA DEFAULT
+    private String fotoEvento;
     private String luogo;
     @ManyToOne
     @JoinColumn(name="autore_id")
@@ -41,12 +39,13 @@ public class Evento {
 
 
     // costruttore generale
-    public Evento(Autore autore, LocalDate dataEvento, String descrizione, String luogo, String nomeEvento, Double prezzo) {
+    public Evento(Autore autore, LocalDate dataEvento, String descrizione, String luogo, String nomeEvento, Double prezzo, String fotoEvento) {
         this.autore = autore;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.luogo = luogo;
         this.nomeEvento = nomeEvento;
         this.prezzo = prezzo;
+        this.fotoEvento = fotoEvento;
     }
 }
