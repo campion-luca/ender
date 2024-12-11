@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@JsonIgnoreProperties({"password", "accountNonLocked", "credentialsNonExpired", "authorities", "enabled"})
+@JsonIgnoreProperties({"accountNonLocked", "credentialsNonExpired", "authorities", "enabled"})
 public class Utente implements UserDetails {
     @Id
     @GeneratedValue

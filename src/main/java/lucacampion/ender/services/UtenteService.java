@@ -49,7 +49,7 @@ public class UtenteService {
     // FIND BY ID AND UPDATE
     public Utente findByIdAndUpdate(Long utenteId, NuovoUtenteDTO body) {
         Utente found = this.trovaUtente(utenteId);
-        if (!found.getNickname().equals(body.nickname())) {
+        if (!found.getEmail().equals(body.email())) { // uso l'email, così posso modificare il nickname
             throw new BadRequestException("L'utente con id " + utenteId + " non è stato trovato!");
         }
         found.setNome(body.nome());
@@ -57,6 +57,7 @@ public class UtenteService {
         found.setEmail(body.email());
         found.setNickname(body.nickname());
         found.setPassword(body.password());
+        found.setFotoProfilo(body.fotoProfilo());
         return this.utenteRepository.save(found);
     }
 
