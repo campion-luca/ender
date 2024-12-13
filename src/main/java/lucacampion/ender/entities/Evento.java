@@ -1,5 +1,6 @@
 package lucacampion.ender.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Evento {
     private String luogo;
     @ManyToOne
     @JoinColumn(name="autore_id")
+    @JsonManagedReference
     private Autore autore;
     @ManyToMany
     @JoinTable(

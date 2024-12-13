@@ -23,7 +23,7 @@ public class Autore {
     @Column(name = "nome_autore", nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "autore")
+    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
     @JsonBackReference
     private List<Evento> listaEventi;
 
