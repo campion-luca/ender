@@ -50,7 +50,7 @@ public class EventoService {
             throw new BadRequestException("L'evento con id " + eventoId + " non è stato trovato!");
         }
         // cerco l'autore dato in input tramite Long ID
-        Autore autore = autoreService.findAutoreById(eventoId);
+        Autore autore = autoreService.trovaAutore(body.autore());
         // lo uso per cambiare il vecchio autore
         found.setAutore(autore);
         found.setDataEvento(body.dataEvento());
